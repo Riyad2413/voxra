@@ -1,0 +1,34 @@
+name: Build Voxra APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract Voxra project
+        run: |
+          unzip -q Voxra_V1_Flutter_Project.zip -d voxra
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.7'
+          channel: stable
+
+      - name: Build APK
+        working-directory: voxra
+        run: |
+          flutter pub get
+          flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Voxra-V1-APK
+          path: voxra/build/app/outputs/flutter-apk/app-release.apk
