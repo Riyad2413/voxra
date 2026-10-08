@@ -23,9 +23,7 @@ jobs:
 
       - name: Copy Voxra source
         run: |
-          cp Voxra_V1_Flutter_Project.zip /tmp/voxra.zip
-          mkdir /tmp/voxra_source
-          unzip -q /tmp/voxra.zip -d /tmp/voxra_source
+          unzip -q Voxra_V1_Flutter_Project.zip -d /tmp/voxra_source
           cp /tmp/voxra_source/pubspec.yaml voxra_build/pubspec.yaml
           cp -r /tmp/voxra_source/lib voxra_build/lib
 
